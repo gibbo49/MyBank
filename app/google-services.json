@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "19064436631",
+    "firebase_url": "https://my-bank-f8b52.firebaseio.com",
+    "project_id": "my-bank-f8b52",
+    "storage_bucket": "my-bank-f8b52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19064436631:android:095f833aa3203dcd",
+        "android_client_info": {
+          "package_name": "com.chrisgibson.mybank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19064436631-7nfv5lgqn557lult2s59mirtnpvu5brj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chrisgibson.mybank",
+            "certificate_hash": "8b42ef10ded28cc072d7a293d94223a9cf031cf2"
+          }
+        },
+        {
+          "client_id": "19064436631-0s5o3s8trnu8sj988bjke1h623dqg399.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "19064436631-0s5o3s8trnu8sj988bjke1h623dqg399.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUhvG2u_4Q0Zs5gpeTcPUfAUFSOjKZ6D8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19064436631-0s5o3s8trnu8sj988bjke1h623dqg399.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
