@@ -21,7 +21,10 @@
             android:theme="@style/Menu"
             app:popupTheme="@style/Menu"
             app:subtitleTextColor="#FFFFFF"
-            app:titleTextColor="#FFFFFF" />
+            app:titleTextColor="#FFFFFF"
+            app:navigationIcon="@drawable/mybankicon"
+            app:title="My Bank"
+            android:textAlignment="center"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -33,6 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:tint="@color/common_google_signin_btn_text_dark_default"
+        app:backgroundTint="@color/colorAccent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.design.widget.CoordinatorLayout>

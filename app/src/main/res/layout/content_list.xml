@@ -9,6 +9,7 @@
     tools:showIn="@layout/activity_list">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_list_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,6 +23,7 @@
         android:layout_height="100dp"
         android:gravity="center_vertical|center_horizontal|center"
         android:lineSpacingExtra="4sp"
+        android:text="This Week:\n$1354.68"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
@@ -29,8 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="This Week:\n$1354.68" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
