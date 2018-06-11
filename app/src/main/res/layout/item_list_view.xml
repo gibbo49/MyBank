@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/item_icon_image"
+            android:id="@+id/item_categoryitem_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
@@ -30,8 +30,8 @@
             android:textColor="#414141"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/item_icon_image"
-            app:layout_constraintTop_toTopOf="@+id/item_icon_image"
+            app:layout_constraintStart_toEndOf="@+id/item_categoryitem_image"
+            app:layout_constraintTop_toTopOf="@+id/item_categoryitem_image"
             tools:text="WALLMART" />
 
         <TextView
@@ -42,8 +42,8 @@
             android:textColor="#414141"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/item_icon_image"
-            app:layout_constraintStart_toEndOf="@+id/item_icon_image"
+            app:layout_constraintBottom_toBottomOf="@+id/item_categoryitem_image"
+            app:layout_constraintStart_toEndOf="@+id/item_categoryitem_image"
             app:layout_constraintTop_toBottomOf="@+id/item_store_text"
             tools:text="$ 18.49" />
 
