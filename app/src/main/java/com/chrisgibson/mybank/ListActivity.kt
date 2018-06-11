@@ -1,7 +1,7 @@
 package com.chrisgibson.mybank
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.menu.MenuBuilder
 import android.view.Menu
@@ -15,8 +15,8 @@ class ListActivity : AppCompatActivity() {
         setSupportActionBar(my_toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val addExpenseIntent = Intent(this, AddExpenseActivity::class.java)
+            startActivity(addExpenseIntent)
         }
     }
 
