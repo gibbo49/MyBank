@@ -22,7 +22,7 @@
         app:titleTextColor="#FFFFFF" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/add_expense_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/add_expense_name" />
 
     <Spinner
         android:id="@+id/add_expense_category_select"
@@ -72,6 +72,7 @@
         android:layout_marginStart="24dp"
         android:backgroundTint="#414141"
         android:elevation="4dp"
+        android:onClick="addItemClicked"
         android:text="Add Expense"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -90,6 +91,7 @@
         android:layout_marginStart="24dp"
         android:backgroundTint="#414141"
         android:elevation="4dp"
+        android:onClick="onCancelClicked"
         android:text="Cancel"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
