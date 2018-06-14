@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -30,7 +31,13 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess(result: LoginResult?) {
                 if (result != null){
                     val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
-                    //firebaseLogin(credential)
+                    auth.signInWithCredential(credential).addOnCompleteListener { task ->
+                        if (task.isSuccessful){
+                            Toast.makeText(this@LoginActivity,"Login Successfull",Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(this@LoginActivity,"Something went wrong. Please try again later",Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
             }
 
@@ -61,6 +68,10 @@ class LoginActivity : AppCompatActivity() {
                     //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     //        .setAction("Action", null).show()
                 }
+
+    }
+
+    fun loginRegisterClicked(view: View){
 
     }
 
