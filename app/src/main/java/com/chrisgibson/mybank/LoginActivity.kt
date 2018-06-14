@@ -11,6 +11,7 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -29,28 +30,20 @@ class LoginActivity : AppCompatActivity() {
         callbackManager = CallbackManager.Factory.create()
         facebooklogin_button.setReadPermissions("email","public_profile")
         facebooklogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult?) {
-                if (result != null){
-                    val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
-                    auth.signInWithCredential(credential).addOnCompleteListener { task ->
-                        if (task.isSuccessful){
-                            Toast.makeText(this@LoginActivity,"Login Successfull",Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(this@LoginActivity,"Something went wrong. Please try again later",Toast.LENGTH_LONG).show()
-                        }
-                    }
-                }
-            }
-
             override fun onCancel() {
                 Log.d("Cancel","Facebook login cancelled")
-                //updateUI(null)
             }
 
             override fun onError(error: FacebookException?) {
                 Log.e("Error","Facebook login error")
-                //updateUI(null)
             }
+
+            override fun onSuccess(result: LoginResult?) {
+                if (result != null){
+                    val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
+                    firebaseLogin(credential)
+                    }
+                }
         })
     }
 
@@ -60,14 +53,12 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithEmailAndPassword(email,password)
                 .addOnSuccessListener {
-
+                    finish()
                 }
                 .addOnFailureListener {
                     Log.e("Exception","Could not sign in user: ${it.localizedMessage}")
                     Snackbar.make(view,"Could not sign in user. Please Try Again.",Snackbar.LENGTH_LONG)
                             .show()
-                    //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    //        .setAction("Action", null).show()
                 }
 
     }
@@ -75,6 +66,18 @@ class LoginActivity : AppCompatActivity() {
     fun loginRegisterClicked(view: View){
         val registerIntent = Intent(this,RegisterActivity::class.java)
         startActivity(registerIntent)
+        finish()
+    }
+
+    fun firebaseLogin(credential: AuthCredential){
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful){
+            finish()
+            }else{
+                Log.e("Error","Firebase sign in failed", it.exception)
+                Toast.makeText(this,"Authentication Failed",Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
 

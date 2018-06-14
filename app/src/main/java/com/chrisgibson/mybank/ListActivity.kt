@@ -8,7 +8,10 @@ import android.support.v7.view.menu.MenuBuilder
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.facebook.login.LoginManager
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_list.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -67,8 +70,16 @@ class ListActivity : AppCompatActivity() {
                 val loginIntent = Intent(this,LoginActivity::class.java)
                 startActivity(loginIntent)
             }else{
-                //auth.signOut()
-                //updateUI()
+
+                val user = auth.currentUser
+                if (user != null) {
+                    for (info in user.providerData) {
+                        when (info.providerId) {
+                            FacebookAuthProvider.PROVIDER_ID -> LoginManager.getInstance().logOut()
+                        }
+                    }
+                }
+                auth.signOut()
             }
             return true
         }
