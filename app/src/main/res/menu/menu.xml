@@ -4,10 +4,10 @@
 
     <item
         android:id="@+id/menu_ClearExpenses"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/clear_expenses"/>
+        android:icon="@drawable/trash"
+        android:title="@string/clear_expenses" />
     <item
         android:id="@+id/menu_logout"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:title="@string/log_out"/>
+        android:title="@string/log_out" />
 </menu>

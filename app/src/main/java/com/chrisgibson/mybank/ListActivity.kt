@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.menu.MenuBuilder
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
+import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_list.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -52,10 +53,26 @@ class ListActivity : AppCompatActivity() {
         val menuItem = menu.getItem(1)
         if (auth.currentUser == null){
             menuItem.title = "Login"
+            menuItem.setIcon(R.drawable.login)
         }else{
             menuItem.title = "Logout"
+            menuItem.setIcon(R.drawable.logout)
         }
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_logout){
+            if (auth.currentUser==null){
+                val loginIntent = Intent(this,LoginActivity::class.java)
+                startActivity(loginIntent)
+            }else{
+                //auth.signOut()
+                //updateUI()
+            }
+            return true
+        }
+        return false
     }
 
 }
