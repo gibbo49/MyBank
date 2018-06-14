@@ -1,5 +1,6 @@
 package com.chrisgibson.mybank
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -72,7 +73,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun loginRegisterClicked(view: View){
-
+        val registerIntent = Intent(this,RegisterActivity::class.java)
+        startActivity(registerIntent)
     }
 
 
