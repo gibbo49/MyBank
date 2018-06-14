@@ -41,13 +41,14 @@ class AddExpenseActivity : AppCompatActivity() {
     }
 
     fun addItemClicked(view: View){
+        val userDocumentId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val data = HashMap<String, Any>()
         data.put(ITEMNAME, add_expense_name.text.toString())
         data.put(ITEMPRICE, add_expense_price_text.text.toString())
         data.put(CATEGORY, addItemCategory)
         data.put(USER_REF, FirebaseAuth.getInstance().currentUser?.uid.toString())
 
-        FirebaseFirestore.getInstance().collection(USER_REF)
+        FirebaseFirestore.getInstance().collection(USER_REF).document(userDocumentId).collection(ITEMS)
                 .add(data)
                 .addOnSuccessListener {
                     finish()
