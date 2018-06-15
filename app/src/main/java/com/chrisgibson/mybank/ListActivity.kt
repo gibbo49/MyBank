@@ -124,6 +124,7 @@ class ListActivity : AppCompatActivity() {
             }
         }
         itemsAdapter.notifyDataSetChanged()
+        main_total_text.text = "THIS WEEK:\n$ "+ calculateTotal()
     }
 
     fun updateUI(){
@@ -144,5 +145,14 @@ class ListActivity : AppCompatActivity() {
     fun getcurrentUser():String{
         val currentUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         return currentUser
+    }
+
+    fun calculateTotal():Double{
+        var runningTotal = 0.00
+        for (i in items){
+            val price =  i.itemPrice
+            runningTotal = runningTotal + price.toDouble()
+        }
+        return runningTotal
     }
 }

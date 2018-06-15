@@ -29,11 +29,13 @@ class ItemsAdapter (val context: Context, val items: ArrayList<Item>): RecyclerV
         val itemCategory = itemView?.findViewById<TextView>(R.id.item_category_text)
         val categoryIcon = itemView?.findViewById<ImageView>(R.id.item_categoryitem_image)
 
+
         fun bindItem(context:Context ,item:Item){
            // val resourceId = context.resources.getIdentifier(item.itemCatImage, "drawable", context.packageName)
             itemName?.text = item.itemName
-            itemPrice?.text = item.itemPrice
+            itemPrice?.text = "$ " + item.itemPrice
             itemCategory?.text = item.itemCategory
+
            // categoryIcon?.setImageResource(resourceId)
 
         }
