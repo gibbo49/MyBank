@@ -124,7 +124,8 @@ class ListActivity : AppCompatActivity() {
             }
         }
         itemsAdapter.notifyDataSetChanged()
-        main_total_text.text = "THIS WEEK:\n$ "+ calculateTotal()
+        val total = calculateTotal()
+        main_total_text.text = "THIS WEEK:\n$ "+ total.format(2)
     }
 
     fun updateUI(){
@@ -154,5 +155,10 @@ class ListActivity : AppCompatActivity() {
             runningTotal = runningTotal + price.toDouble()
         }
         return runningTotal
+    }
+
+    fun Double.format(digits: Int):String{
+        val string = java.lang.String.format("%.${digits}f", this)
+        return string
     }
 }
