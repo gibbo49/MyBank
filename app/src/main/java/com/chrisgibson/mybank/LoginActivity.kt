@@ -15,6 +15,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.content_list.*
 
 class LoginActivity : AppCompatActivity() {
 

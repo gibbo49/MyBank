@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.content_list.*
 
 class ListActivity : AppCompatActivity() {
 
-    val userCollectionRef = FirebaseFirestore.getInstance().collection(USER_REF).document(FirebaseAuth.getInstance().currentUser?.uid.toString()).collection(ITEMS)
     lateinit var itemsAdapter: ItemsAdapter
     val items = arrayListOf<Item>()
     lateinit var itemsListener: ListenerRegistration
@@ -99,7 +98,7 @@ class ListActivity : AppCompatActivity() {
     }
 
     fun setListener(){
-        itemsListener = userCollectionRef
+        itemsListener = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS)
                 .orderBy(ITEMNAME, Query.Direction.ASCENDING)
                 .addSnapshotListener(this){snapshot, exception ->
                     if (exception != null){
@@ -132,9 +131,18 @@ class ListActivity : AppCompatActivity() {
             fab.isEnabled = false
             items.clear()
             itemsAdapter.notifyDataSetChanged()
+            main_total_text.setText(R.string.welcome_login)
         }else{
+            getcurrentUser()
             fab.isEnabled = true
             setListener()
+
+
         }
+    }
+
+    fun getcurrentUser():String{
+        val currentUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        return currentUser
     }
 }
