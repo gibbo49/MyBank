@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-class ItemsAdapter (val context: Context, val items: ArrayList<Item>): RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
+class ItemsAdapter (val items: ArrayList<Item>): RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_list_view,parent,false)
         return ViewHolder(view)
@@ -19,7 +19,7 @@ class ItemsAdapter (val context: Context, val items: ArrayList<Item>): RecyclerV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.bindItem(context,items[position])
+        holder?.bindItem(items[position])
     }
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -30,13 +30,11 @@ class ItemsAdapter (val context: Context, val items: ArrayList<Item>): RecyclerV
         val categoryIcon = itemView?.findViewById<ImageView>(R.id.item_categoryitem_image)
 
 
-        fun bindItem(context:Context ,item:Item){
-           // val resourceId = context.resources.getIdentifier(item.itemCatImage, "drawable", context.packageName)
+        fun bindItem(item:Item){
             itemName?.text = item.itemName
             itemPrice?.text = "$ " + item.itemPrice
             itemCategory?.text = item.itemCategory
-
-           // categoryIcon?.setImageResource(resourceId)
+            categoryIcon?.setImageResource(item.categoryIcon.toInt())
 
         }
     }

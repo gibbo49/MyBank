@@ -39,7 +39,7 @@ class ListActivity : AppCompatActivity() {
             startActivity(addExpenseIntent)
         }
 
-        itemsAdapter = ItemsAdapter(this,items)
+        itemsAdapter = ItemsAdapter(items)
         item_list_view.adapter = itemsAdapter
         val layoutManager = LinearLayoutManager(this)
         item_list_view.layoutManager = layoutManager
@@ -118,14 +118,15 @@ class ListActivity : AppCompatActivity() {
                 val itemname = data[ITEMNAME] as String
                 val itemprice = data[ITEMPRICE] as String
                 val category = data[CATEGORY] as String
+                val categoryIcon = data[CATEGORY_ICON] as Long
 
-                val newItem = Item(itemname,itemprice,category)
+                val newItem = Item(itemname,itemprice,category,categoryIcon)
                 items.add(newItem)
             }
         }
         itemsAdapter.notifyDataSetChanged()
         val total = calculateTotal()
-        main_total_text.text = "THIS WEEK:\n$ "+ total.format(2)
+        main_total_text.text = "THIS WEEK:\n$ "+ total.decformat(2)
     }
 
     fun updateUI(){
@@ -157,7 +158,7 @@ class ListActivity : AppCompatActivity() {
         return runningTotal
     }
 
-    fun Double.format(digits: Int):String{
+    fun Double.decformat(digits: Int):String{
         val string = java.lang.String.format("%.${digits}f", this)
         return string
     }
