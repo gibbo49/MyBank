@@ -23,7 +23,9 @@
         </activity>
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ItemOptionsActivity" />
+        <activity android:name=".UpdateItemActivity"></activity>
     </application>
 
 </manifest>

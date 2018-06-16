@@ -6,6 +6,7 @@
     <string name="facebook_app_id">1691333370931926</string>
     <string name="fb_login_protocol_scheme">fb1691333370931926</string>
     <string name="welcome_login">Welcome to MyBank\nPlease Log in</string>
+    <string name="total">WEEKLY TOTAL: \n$ %.2f</string>
 
 
 </resources>

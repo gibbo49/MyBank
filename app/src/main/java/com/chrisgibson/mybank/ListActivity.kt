@@ -1,5 +1,6 @@
 package com.chrisgibson.mybank
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,19 +10,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_list.*
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.content_list.*
+import kotlin.concurrent.thread
 
 
-class ListActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
 
     lateinit var itemsAdapter: ItemsAdapter
     val items = arrayListOf<Item>()
@@ -39,7 +39,7 @@ class ListActivity : AppCompatActivity() {
             startActivity(addExpenseIntent)
         }
 
-        itemsAdapter = ItemsAdapter(items)
+        itemsAdapter = ItemsAdapter(items,this)
         item_list_view.adapter = itemsAdapter
         val layoutManager = LinearLayoutManager(this)
         item_list_view.layoutManager = layoutManager
@@ -57,6 +57,73 @@ class ListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateUI()
+    }
+
+    override fun itemOptionsMenuClicked(item: Item) {
+        val builder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.options_menu, null)
+        val deleteBtn = dialogView.findViewById<Button>(R.id.option_delete_btn)
+        val editBtn = dialogView.findViewById<Button>(R.id.option_edit_btn)
+
+        builder.setView(dialogView).setNegativeButton("Cancel") { _, _ -> }
+        val ad = builder.show()
+
+        deleteBtn.setOnClickListener {
+            val itemRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS).document(item.documentId)
+            val collectionRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS)
+
+            deleteCollection(collectionRef,item){success->
+                if (success){
+                    itemRef.delete()
+                            .addOnSuccessListener {
+                                ad.dismiss()
+                            }
+                            .addOnFailureListener{exception ->
+                                Log.e("Exception","Could no delete item:$exception")
+                            }
+                }
+            }
+        }
+        editBtn.setOnClickListener {
+
+        }
+
+
+/*
+
+        editBtn.setOnClickListener {
+            val updateIntent = Intent(this,UpdateCommentActivity::class.java)
+            updateIntent.putExtra(THOUGHT_DOC_ID_EXTRA, thought.documentId)
+            updateIntent.putExtra(THOUGHT_TXT_EXTRA,thought.thoughtTxt)
+            updateIntent.putExtra(COMMENT_DOC_ID_EXTRA,"0")
+            updateIntent.putExtra(COMMENT_TXT_EXTRA,"0")
+            ad.dismiss()
+            startActivity(updateIntent)
+
+        }
+
+    }*/
+    }
+
+
+    fun deleteCollection(collection: CollectionReference, item: Item, complete: (Boolean) -> Unit) {
+            collection.get().addOnSuccessListener { snapshot ->
+                thread {
+                    val batch = FirebaseFirestore.getInstance().batch()
+                    for (document in snapshot) {
+                        val docRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS).document(item.documentId)
+                        batch.delete(docRef)
+                    }
+                    batch.commit()
+                            .addOnSuccessListener {
+                                complete(true)
+                            }.addOnFailureListener { exception ->
+                                Log.e("Exception", "Could not delete subcollection: ${exception.localizedMessage}")
+                            }
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("Exception", "Could not retreive documents: ${exception.localizedMessage}")
+            }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
@@ -80,7 +147,6 @@ class ListActivity : AppCompatActivity() {
                 val loginIntent = Intent(this,LoginActivity::class.java)
                 startActivity(loginIntent)
             }else{
-
                 val user = auth.currentUser
                 if (user != null) {
                     for (info in user.providerData) {
@@ -119,14 +185,16 @@ class ListActivity : AppCompatActivity() {
                 val itemprice = data[ITEMPRICE] as String
                 val category = data[CATEGORY] as String
                 val categoryIcon = data[CATEGORY_ICON] as Long
+                val user = data[USER_REF] as String
+                val documentId = document.id
 
-                val newItem = Item(itemname,itemprice,category,categoryIcon)
+                val newItem = Item(itemname,itemprice,category,categoryIcon,user,documentId)
                 items.add(newItem)
             }
         }
         itemsAdapter.notifyDataSetChanged()
         val total = calculateTotal()
-        main_total_text.text = "THIS WEEK:\n$ "+ total.decformat(2)
+        main_total_text.text = getString(R.string.total,total)
     }
 
     fun updateUI(){
@@ -139,8 +207,6 @@ class ListActivity : AppCompatActivity() {
             getcurrentUser()
             fab.isEnabled = true
             setListener()
-
-
         }
     }
 
@@ -156,10 +222,5 @@ class ListActivity : AppCompatActivity() {
             runningTotal = runningTotal + price.toDouble()
         }
         return runningTotal
-    }
-
-    fun Double.decformat(digits: Int):String{
-        val string = java.lang.String.format("%.${digits}f", this)
-        return string
     }
 }

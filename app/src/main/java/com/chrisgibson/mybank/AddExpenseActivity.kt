@@ -29,9 +29,7 @@ class AddExpenseActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                addItemCategory = add_expense_category_select.selectedItem.toString()
             }
-
         }
-
     }
 
     private fun loadSpinner(){
@@ -44,7 +42,7 @@ class AddExpenseActivity : AppCompatActivity() {
         val rawPrice = add_expense_price_text.text.toString().toDouble()
         val data = HashMap<String, Any>()
         data.put(ITEMNAME, add_expense_name.text.toString())
-        data.put(ITEMPRICE, rawPrice.decformat(2))
+        data.put(ITEMPRICE, rawPrice.decformat())
         data.put(CATEGORY, addItemCategory)
         data.put(USER_REF, FirebaseAuth.getInstance().currentUser?.uid.toString())
         data.put(CATEGORY_ICON, getIcon(addItemCategory))
@@ -80,8 +78,8 @@ class AddExpenseActivity : AppCompatActivity() {
         finish()
     }
 
-    fun Double.decformat(digits: Int):String{
-        val string = java.lang.String.format("%.${digits}f", this)
+    fun Double.decformat():String{
+        val string = java.lang.String.format("%.2f", this)
         return string
     }
 }
