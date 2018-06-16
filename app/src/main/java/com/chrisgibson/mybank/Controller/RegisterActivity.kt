@@ -1,10 +1,14 @@
-package com.chrisgibson.mybank
+package com.chrisgibson.mybank.Controller
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
+import com.chrisgibson.mybank.Utilities.DATE_CREATED
+import com.chrisgibson.mybank.R
+import com.chrisgibson.mybank.Utilities.USERNAME
+import com.chrisgibson.mybank.Utilities.USER_REF
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FieldValue

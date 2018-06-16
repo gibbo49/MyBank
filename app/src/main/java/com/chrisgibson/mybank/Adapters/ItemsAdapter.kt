@@ -1,7 +1,8 @@
-package com.chrisgibson.mybank
+package com.chrisgibson.mybank.Adapters
 
-import android.content.Context
-import android.content.Intent
+
+
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.chrisgibson.mybank.Interface.ItemOptionsClickListener
+import com.chrisgibson.mybank.Model.Item
+import com.chrisgibson.mybank.R
 import com.google.firebase.auth.FirebaseAuth
 
 class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: ItemOptionsClickListener): RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_list_view,parent,false)
         return ViewHolder(view)
     }
@@ -34,7 +38,7 @@ class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: It
         val deleteIcon = itemView?.findViewById<Button>(R.id.item_delete_button)
 
 
-        fun bindItem(item:Item){
+        fun bindItem(item: Item){
             deleteIcon.visibility = View.INVISIBLE
             itemName?.text = item.itemName
             itemPrice?.text = "$ " + item.itemPrice

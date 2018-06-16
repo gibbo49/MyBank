@@ -1,4 +1,5 @@
-package com.chrisgibson.mybank
+package com.chrisgibson.mybank.Controller
+
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.chrisgibson.mybank.R
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -15,7 +17,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.content_list.*
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -48,24 +50,34 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode,resultCode, data)
+
+
+    }
+
     fun loginClicked(view: View){
         val email = login_email_text.text.toString()
         val password = login_password_text.text.toString()
 
-        auth.signInWithEmailAndPassword(email,password)
-                .addOnSuccessListener {
-                    finish()
-                }
-                .addOnFailureListener {
-                    Log.e("Exception","Could not sign in user: ${it.localizedMessage}")
-                    Snackbar.make(view,"Could not sign in user. Please Try Again.",Snackbar.LENGTH_LONG)
-                            .show()
-                }
+        if (email != "" && password != "") {
 
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        Log.e("Exception", "Could not sign in user: ${it.localizedMessage}")
+                        Snackbar.make(view, "Could not sign in user. Please Try Again.", Snackbar.LENGTH_LONG).show()
+                    }
+        } else {
+            Snackbar.make(view,"Please enter your Email & Password",Snackbar.LENGTH_LONG).show()
+        }
     }
 
     fun loginRegisterClicked(view: View){
-        val registerIntent = Intent(this,RegisterActivity::class.java)
+        val registerIntent = Intent(this, RegisterActivity::class.java)
         startActivity(registerIntent)
         finish()
     }
@@ -80,6 +92,4 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

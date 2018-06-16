@@ -1,4 +1,4 @@
-package com.chrisgibson.mybank
+package com.chrisgibson.mybank.Utilities
 
 const val USER_REF = "user"
 const val ITEMNAME = "itemName"
