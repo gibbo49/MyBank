@@ -7,6 +7,10 @@
     <string name="fb_login_protocol_scheme">fb1691333370931926</string>
     <string name="welcome_login">Welcome to MyBank\nPlease Log in</string>
     <string name="total">WEEKLY TOTAL: \n$ %.2f</string>
+    <string name="delete_item">Delete Item?</string>
+    <string name="delete_item_text">Are you sure you want to delete this expense item? This cannot be undone.</string>
+    <string name="delete_all">Clear Expenses?</string>
+    <string name="delete_all_text">Are you sure you want to clear ALL expenses? This cannot be undone.</string>
 
 
 </resources>

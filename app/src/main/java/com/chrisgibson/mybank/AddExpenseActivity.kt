@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -37,6 +38,10 @@ class AddExpenseActivity : AppCompatActivity() {
     }
 
     fun addItemClicked(view: View){
+        val itemName = add_expense_name.text.toString()
+        val itemPrice = add_expense_price_text.text.toString()
+
+        if (itemName != "" && itemPrice != ""){
         val userDocumentId = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val rawPrice = add_expense_price_text.text.toString().toDouble()
         val data = HashMap<String, Any>()
@@ -53,7 +58,9 @@ class AddExpenseActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener {exception ->
                     Log.e("EXC", "Could not add post: $exception")
-                }
+                }} else {
+            Toast.makeText(this,"Please enter a name, price and select a category.", Toast.LENGTH_LONG).show()
+        }
     }
 
     fun getIcon(addItemCategory:String):Int{

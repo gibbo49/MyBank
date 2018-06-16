@@ -1,8 +1,6 @@
 package com.chrisgibson.mybank
 
 import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,12 +9,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.content_list.*
@@ -64,7 +59,6 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
     override fun itemOptionsMenuClicked(item: Item) {
         val builder = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.options_menu, null)
-
         builder.setView(dialogView).setNegativeButton("Cancel") { _, _ -> }
         builder.setView(dialogView).setPositiveButton("Yes!"){dialog,yes->
             val itemRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS).document(item.documentId)
@@ -76,7 +70,7 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
                 }
             }
         }
-        val ad = builder.show()
+        builder.show()
     }
 
 
@@ -136,8 +130,7 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
         } else{
             if (item.itemId == R.id.menu_ClearExpenses){
                 val builder = AlertDialog.Builder(this)
-                val dialogView = layoutInflater.inflate(R.layout.options_menu, null)
-
+                val dialogView = layoutInflater.inflate(R.layout.clear_expenses, null)
                 builder.setView(dialogView).setNegativeButton("Cancel") { _, _ -> }
                 builder.setView(dialogView).setPositiveButton("Yes!") { dialog, yes ->
                     val collection = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS)
@@ -155,12 +148,10 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
                         }
                     }
                 }
-                val ad = builder.show()
+                builder.show()
             }
         }
         return false
-
-
     }
 
     fun setListener(){
