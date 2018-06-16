@@ -2,6 +2,7 @@ package com.chrisgibson.mybank
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -62,13 +63,12 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
     override fun itemOptionsMenuClicked(item: Item) {
         val builder = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.options_menu, null)
-        val deleteBtn = dialogView.findViewById<Button>(R.id.option_delete_btn)
-        val editBtn = dialogView.findViewById<Button>(R.id.option_edit_btn)
 
         builder.setView(dialogView).setNegativeButton("Cancel") { _, _ -> }
+        builder.setView(dialogView).setPositiveButton("Yes!"){_,_-> }
         val ad = builder.show()
 
-        deleteBtn.setOnClickListener {
+        /*deleteBtn.setOnClickListener {
             val itemRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS).document(item.documentId)
             val collectionRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS)
 
@@ -83,26 +83,7 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
                             }
                 }
             }
-        }
-        editBtn.setOnClickListener {
-
-        }
-
-
-/*
-
-        editBtn.setOnClickListener {
-            val updateIntent = Intent(this,UpdateCommentActivity::class.java)
-            updateIntent.putExtra(THOUGHT_DOC_ID_EXTRA, thought.documentId)
-            updateIntent.putExtra(THOUGHT_TXT_EXTRA,thought.thoughtTxt)
-            updateIntent.putExtra(COMMENT_DOC_ID_EXTRA,"0")
-            updateIntent.putExtra(COMMENT_TXT_EXTRA,"0")
-            ad.dismiss()
-            startActivity(updateIntent)
-
-        }
-
-    }*/
+        }*/
     }
 
 
