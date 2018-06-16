@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -65,25 +66,17 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
         val dialogView = layoutInflater.inflate(R.layout.options_menu, null)
 
         builder.setView(dialogView).setNegativeButton("Cancel") { _, _ -> }
-        builder.setView(dialogView).setPositiveButton("Yes!"){_,_-> }
-        val ad = builder.show()
-
-        /*deleteBtn.setOnClickListener {
+        builder.setView(dialogView).setPositiveButton("Yes!"){dialog,yes->
             val itemRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS).document(item.documentId)
             val collectionRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS)
 
             deleteCollection(collectionRef,item){success->
                 if (success){
                     itemRef.delete()
-                            .addOnSuccessListener {
-                                ad.dismiss()
-                            }
-                            .addOnFailureListener{exception ->
-                                Log.e("Exception","Could no delete item:$exception")
-                            }
                 }
             }
-        }*/
+        }
+        val ad = builder.show()
     }
 
 
@@ -140,8 +133,34 @@ class ListActivity : AppCompatActivity(), ItemOptionsClickListener {
                 updateUI()
             }
             return true
+        } else{
+            if (item.itemId == R.id.menu_ClearExpenses){
+                val builder = AlertDialog.Builder(this)
+                val dialogView = layoutInflater.inflate(R.layout.options_menu, null)
+
+                builder.setView(dialogView).setNegativeButton("Cancel") { _, _ -> }
+                builder.setView(dialogView).setPositiveButton("Yes!") { dialog, yes ->
+                    val collection = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS)
+                    collection.get().addOnSuccessListener {snapshot ->
+                        thread {
+                            val batch = FirebaseFirestore.getInstance().batch()
+                            var count = 0
+                            for (i in items){
+                                val itemId = items[count].documentId
+                                val docRef = FirebaseFirestore.getInstance().collection(USER_REF).document(getcurrentUser()).collection(ITEMS).document(itemId)
+                                batch.delete(docRef)
+                                count++
+                            }
+                            batch.commit()
+                        }
+                    }
+                }
+                val ad = builder.show()
+            }
         }
         return false
+
+
     }
 
     fun setListener(){

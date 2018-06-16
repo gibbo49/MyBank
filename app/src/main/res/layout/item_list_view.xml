@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:layout_marginBottom="5dp"
     android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp"
@@ -11,15 +11,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/item_categoryitem_image"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:textAlignment="center"
             android:textColor="#414141"
             android:textSize="16sp"
@@ -43,6 +44,7 @@
             android:id="@+id/item_amount_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:textAlignment="center"
             android:textColor="#414141"
@@ -58,9 +60,9 @@
             android:id="@+id/item_delete_button"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@android:drawable/ic_delete"
             android:backgroundTint="#414141"
             app:layout_constraintBottom_toBottomOf="parent"
