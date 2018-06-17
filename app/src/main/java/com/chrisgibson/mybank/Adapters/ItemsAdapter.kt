@@ -3,6 +3,8 @@ package com.chrisgibson.mybank.Adapters
 
 
 
+import android.graphics.Color
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import android.widget.TextView
 import com.chrisgibson.mybank.Interface.ItemOptionsClickListener
 import com.chrisgibson.mybank.Model.Item
 import com.chrisgibson.mybank.R
+import com.chrisgibson.mybank.Utilities.FunctionRecycler
 import com.google.firebase.auth.FirebaseAuth
 
 class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: ItemOptionsClickListener): RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
@@ -36,6 +39,7 @@ class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: It
         val itemCategory = itemView?.findViewById<TextView>(R.id.item_category_text)
         val categoryIcon = itemView?.findViewById<ImageView>(R.id.item_categoryitem_image)
         val deleteIcon = itemView?.findViewById<Button>(R.id.item_delete_button)
+        val itemCard = itemView?.findViewById<CardView>(R.id.item_card)
 
 
         fun bindItem(item: Item){
@@ -45,10 +49,15 @@ class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: It
             itemCategory?.text = item.itemCategory
             categoryIcon?.setImageResource(item.categoryIcon.toInt())
 
-            if (FirebaseAuth.getInstance().currentUser?.uid == item.user)
-            deleteIcon.visibility = View.VISIBLE
-            deleteIcon.setOnClickListener {
+            if (FunctionRecycler.getcurrentUser() == item.user){
+                val color = Color.parseColor("#FFFFFF")
+                itemCard.setBackgroundColor(color)
+                deleteIcon.visibility = View.VISIBLE
+                deleteIcon.setOnClickListener {
                 itemOptionsClickListener.itemOptionsMenuClicked(item)
+            }}else{
+                val color = Color.parseColor("#FCF0EE")
+                itemCard.setCardBackgroundColor(color)
             }
 
         }

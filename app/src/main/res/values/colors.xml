@@ -3,4 +3,5 @@
     <color name="colorPrimary">#414141</color>
     <color name="colorPrimaryDark">#414141</color>
     <color name="colorAccent">#414141</color>
+    <color name="cardbkg">#e4e4e4</color>
 </resources>

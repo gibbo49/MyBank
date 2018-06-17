@@ -8,6 +8,33 @@
     tools:context=".Controller.ListActivity"
     tools:showIn="@layout/activity_list">
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linkedLayout"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/total_cardview">
+
+        <TextView
+            android:id="@+id/linkedText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#e4e4e4"
+            android:gravity="center"
+            android:text="Color dentotes items from linked user."
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/item_list_view"
         android:layout_width="0dp"
@@ -15,18 +42,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/total_cardview" />
+        app:layout_constraintTop_toBottomOf="@+id/linkedLayout">
+
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.v7.widget.CardView
         android:id="@+id/total_cardview"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        app:cardElevation="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/item_list_view"
+        android:layout_height="300dp"
+        app:cardBackgroundColor="#414141"
+        app:cardElevation="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +66,7 @@
                 android:layout_height="0dp"
                 android:gravity="center_vertical|center_horizontal|center"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:textColor="#FFFFFF"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,6 +74,15 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#BBBABC"
+                android:visibility="invisible">
+
+            </com.github.mikephil.charting.charts.PieChart>
 
         </android.support.constraint.ConstraintLayout>
 
