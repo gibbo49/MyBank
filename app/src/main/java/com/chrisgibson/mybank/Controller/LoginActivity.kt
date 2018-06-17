@@ -52,12 +52,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        progressBar2.visibility = View.VISIBLE
         callbackManager.onActivityResult(requestCode,resultCode, data)
 
 
     }
 
     fun loginClicked(view: View){
+        progressBar2.visibility = View.VISIBLE
         val email = login_email_text.text.toString()
         val password = login_password_text.text.toString()
 
@@ -66,10 +68,12 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
                         finish()
+                        progressBar2.visibility = View.INVISIBLE
                     }
                     .addOnFailureListener {
                         Log.e("Exception", "Could not sign in user: ${it.localizedMessage}")
                         Snackbar.make(view, "Could not sign in user. Please Try Again.", Snackbar.LENGTH_LONG).show()
+                        progressBar2.visibility = View.INVISIBLE
                     }
         } else {
             Snackbar.make(view,"Please enter your Email & Password",Snackbar.LENGTH_LONG).show()
@@ -80,15 +84,18 @@ class LoginActivity : AppCompatActivity() {
         val registerIntent = Intent(this, RegisterActivity::class.java)
         startActivity(registerIntent)
         finish()
+
     }
 
     fun firebaseLogin(credential: AuthCredential){
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful){
             finish()
+                progressBar2.visibility = View.INVISIBLE
             }else{
                 Log.e("Error","Firebase sign in failed", it.exception)
                 Toast.makeText(this,"Authentication Failed",Toast.LENGTH_LONG).show()
+                progressBar2.visibility = View.INVISIBLE
             }
         }
     }

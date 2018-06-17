@@ -15,7 +15,7 @@
         android:elevation="4dp"
         android:textAlignment="center"
         android:theme="@style/Menu"
-        app:navigationIcon="@drawable/mybankicon"
+        app:navigationIcon="@drawable/ic_mybank"
         app:popupTheme="@style/Menu"
         app:subtitleTextColor="#FFFFFF"
         app:title="My Bank"
@@ -139,5 +139,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/add_expense_price_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/add_expense_price_text" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/add_expense_price_text"
+        app:layout_constraintEnd_toStartOf="@+id/add_expense_price_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/add_expense_price_text"
+        app:layout_constraintTop_toBottomOf="@+id/add_expense_name" />
 
 </android.support.constraint.ConstraintLayout>

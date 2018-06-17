@@ -22,7 +22,7 @@
             app:popupTheme="@style/Menu"
             app:subtitleTextColor="#FFFFFF"
             app:titleTextColor="#FFFFFF"
-            app:navigationIcon="@drawable/mybankicon"
+            app:navigationIcon="@drawable/ic_mybank"
             app:title="My Bank"
             android:textAlignment="center"/>
 

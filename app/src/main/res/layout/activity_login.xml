@@ -13,12 +13,13 @@
         android:background="@color/colorAccent"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/Menu"
-        app:titleTextColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/Menu" />
+        app:navigationIcon="@drawable/ic_mybank"
+        app:popupTheme="@style/Menu"
+        app:titleTextColor="#FFFFFF"/>
 
     <EditText
         android:id="@+id/login_email_text"
@@ -91,4 +92,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/login_login_button"
+        app:layout_constraintEnd_toStartOf="@+id/login_password_text"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/login_password_text"
+        app:layout_constraintTop_toTopOf="@+id/login_password_text" />
+
 </android.support.constraint.ConstraintLayout>

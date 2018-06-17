@@ -31,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun onRegisterClicked(view: View){
+        progressBar.visibility = View.VISIBLE
         val email = register_email_text.text.toString()
         val password = register_password_text.text.toString()
         val username = register_username_text.text.toString()
@@ -51,6 +52,7 @@ class RegisterActivity : AppCompatActivity() {
                             .set(data)
                             .addOnSuccessListener {
                                 finish()
+                                progressBar.visibility = View.INVISIBLE
                             }
                             .addOnFailureListener {
                                 Log.e("Exception", "Could Not Create User document: $it")
