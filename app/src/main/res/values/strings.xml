@@ -27,6 +27,7 @@
     <string name="category_icon">Category Icon</string>
     <string name="listviewprice">$ %1$s</string>
     <string name="link_account">Link Account</string>
+    <string name="linked_user_item">Linked User Item</string>
 
 
 </resources>

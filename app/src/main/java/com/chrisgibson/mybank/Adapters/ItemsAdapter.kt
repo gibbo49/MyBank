@@ -40,24 +40,23 @@ class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: It
         val categoryIcon = itemView?.findViewById<ImageView>(R.id.item_categoryitem_image)
         val deleteIcon = itemView?.findViewById<Button>(R.id.item_delete_button)
         val itemCard = itemView?.findViewById<CardView>(R.id.item_card)
+        val linktext = itemView?.findViewById<TextView>(R.id.linked_item_text)
 
 
         fun bindItem(item: Item){
             deleteIcon.visibility = View.INVISIBLE
+            linktext.visibility = View.INVISIBLE
             itemName?.text = item.itemName
             itemPrice?.text = "$ " + item.itemPrice
             itemCategory?.text = item.itemCategory
             categoryIcon?.setImageResource(item.categoryIcon.toInt())
 
             if (FunctionRecycler.getcurrentUser() == item.user){
-                val color = Color.parseColor("#FFFFFF")
-                itemCard.setBackgroundColor(color)
                 deleteIcon.visibility = View.VISIBLE
                 deleteIcon.setOnClickListener {
                 itemOptionsClickListener.itemOptionsMenuClicked(item)
             }}else{
-                val color = Color.parseColor("#FCF0EE")
-                itemCard.setCardBackgroundColor(color)
+                linktext.visibility = View.VISIBLE
             }
 
         }
