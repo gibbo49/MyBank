@@ -1,7 +1,5 @@
 package com.chrisgibson.mybank.Controller
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,32 +20,23 @@ class LinkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_link)
-        val prefs = applicationContext.getSharedPreferences("MyPrefs",Context.MODE_PRIVATE)
+        val getuserdoc = FirebaseFirestore.getInstance().collection(USER_REF).document(FunctionRecycler.getcurrentUser()).get().addOnCompleteListener {
+            val linkedId = it.result.get(LINKED_ID).toString()
+            link_account_text.setText(linkedId)
         currentUserId_text.text = FunctionRecycler.getcurrentUser()
-        val savedlink = prefs.getString(LINKED_ID,null)
-        if (savedlink != null){
-            link_account_text.setText(savedlink.toString())
         }
     }
 
-    fun onSavedClicked(view:View){
-        val prefs = applicationContext.getSharedPreferences("MyPrefs",Context.MODE_PRIVATE)
-        val linkAccount = link_account_text.text.toString()
-        if (linkAccount != ""){
-            val editor = prefs.edit()
-            editor.putString(LINKED_ID,linkAccount)
-            editor.apply()
-            val userDocumentId = FunctionRecycler.getcurrentUser()
-            FirebaseFirestore.getInstance().collection(USER_REF).document(userDocumentId)
-                    .update(LINKED_ID,linkAccount)
-                    .addOnSuccessListener {
-                        finish()
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.e("Exception","Could not add linked account:$exception")
-                    }
-        }else{
+    fun onSavedClicked(view:View) {
+        val saveuserdoc = FirebaseFirestore.getInstance().collection(USER_REF).document(FunctionRecycler.getcurrentUser()).update(LINKED_ID, link_account_text.text.toString()).addOnCompleteListener {
             finish()
+        }.addOnFailureListener {exception ->
+            Log.e("exception","Could not update document exception:$exception")
+            Toast.makeText(this,"Could Not Save Link. Please Try Again",Toast.LENGTH_LONG).show()
+                }
+        if (link_account_text.text.toString() == ""){
+
         }
     }
+
 }

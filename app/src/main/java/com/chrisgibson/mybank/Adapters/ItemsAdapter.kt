@@ -39,7 +39,6 @@ class ItemsAdapter (val items: ArrayList<Item>, val itemOptionsClickListener: It
         val itemCategory = itemView?.findViewById<TextView>(R.id.item_category_text)
         val categoryIcon = itemView?.findViewById<ImageView>(R.id.item_categoryitem_image)
         val deleteIcon = itemView?.findViewById<Button>(R.id.item_delete_button)
-        val itemCard = itemView?.findViewById<CardView>(R.id.item_card)
         val linktext = itemView?.findViewById<TextView>(R.id.linked_item_text)
 
 

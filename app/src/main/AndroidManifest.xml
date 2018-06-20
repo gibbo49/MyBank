@@ -24,7 +24,8 @@
         <activity android:name=".Controller.AddExpenseActivity" />
         <activity android:name=".Controller.LoginActivity" />
         <activity android:name=".Controller.RegisterActivity" />
-        <activity android:name=".Controller.LinkActivity"></activity>
+        <activity android:name=".Controller.LinkActivity" />
+        <activity android:name=".Controller.AboutActivity"></activity>
     </application>
 
 </manifest>

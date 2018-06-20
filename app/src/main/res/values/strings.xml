@@ -10,7 +10,7 @@
     <string name="delete_item">Delete Item?</string>
     <string name="delete_item_text">Are you sure you want to delete this expense item? This cannot be undone.</string>
     <string name="delete_all">Clear Expenses?</string>
-    <string name="delete_all_text">Are you sure you want to clear ALL expenses? This cannot be undone.</string>
+    <string name="delete_all_text">Are you sure you want to clear ALL USER expenses? This cannot be undone. \nPlease note.. \nAny Linked account items will still appear until the linked user deletes them or clears their list.</string>
     <string name="item_name_store">Item Name/Store</string>
     <string name="price">Price</string>
     <string name="add_expense">Add Expense</string>
@@ -28,6 +28,7 @@
     <string name="listviewprice">$ %1$s</string>
     <string name="link_account">Link Account</string>
     <string name="linked_user_item">Linked User Item</string>
+    <string name="about_app">About App</string>
 
 
 </resources>

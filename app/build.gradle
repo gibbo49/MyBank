@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.facebook.android:facebook-login:4.33.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.airbnb.android:lottie:2.5.4'
 }
 
 apply plugin: 'com.google.gms.google-services'

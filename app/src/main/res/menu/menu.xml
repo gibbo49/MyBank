@@ -13,8 +13,13 @@
         android:orderInCategory="2"
         android:title="@string/link_account" />
     <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_mybank"
+        android:orderInCategory="3"
+        android:title="@string/about_app"/>
+    <item
         android:id="@+id/menu_logout"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         android:title="@string/log_out" />
 </menu>

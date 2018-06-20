@@ -1,9 +1,11 @@
 package com.chrisgibson.mybank.Services
 
 import android.graphics.Color
+import com.chrisgibson.mybank.Model.Item
 import com.chrisgibson.mybank.Utilities.*
 
 object DataService {
+
 
     fun colorList():ArrayList<Int>{
         val colors: ArrayList<Int> = ArrayList()
